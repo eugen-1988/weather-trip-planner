@@ -24,7 +24,7 @@ const ForecastSlider = () => {
       </h2>
 
       {/* 🔸 Forecast cards scrollable */}
-      <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400">
+      <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 py-6 px-6">
         <div className="flex gap-4 min-w-max">
           {forecast.map((day, index) => {
             const code = iconToCodeMap[day.icon];

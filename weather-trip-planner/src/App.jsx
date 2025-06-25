@@ -5,9 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Welcome from "./components/Welcome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import NewTrip from "./pages/NewTrip";
-import TripDetails from "./pages/TripDetails";
+
+import TripPlanner from "./pages/TripPlanner";
+import MyTrips from "./pages/MyTrips";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Home from "./pages/Home";
 
@@ -41,9 +41,8 @@ const App = () => {
         />
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/new-trip" element={<NewTrip />} />
-          <Route path="/trip/:id" element={<TripDetails />} />
+          <Route path="/trip-planner" element={<TripPlanner />} />
+          <Route path="/my-trips" element={<MyTrips />} />
         </Route>
       </Routes>
       <ToastContainer position="top-right" autoClose={3000} />

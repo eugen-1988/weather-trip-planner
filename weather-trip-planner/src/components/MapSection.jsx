@@ -1,7 +1,7 @@
 // src/components/MapSection.jsx
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import { motion } from "framer-motion";
 import "leaflet/dist/leaflet.css";
 
@@ -50,6 +50,17 @@ const MapSection = () => {
 
         {/* Strat OpenWeather: Temperatură globală */}
         <TileLayer url={openWeatherLayer} opacity={0.5} />
+
+        {/* 🔥 Marker pentru locația utilizatorului */}
+        {coords && (
+          <Marker position={[coords.lat, coords.lon]}>
+            <Popup>
+              Your location
+              <br />
+              Lat: {coords.lat}, Lon: {coords.lon}
+            </Popup>
+          </Marker>
+        )}
 
         <RecenterMap coords={coords} />
       </MapContainer>

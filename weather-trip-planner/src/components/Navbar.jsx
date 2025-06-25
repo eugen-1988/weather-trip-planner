@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiSettings, FiMapPin, FiSun, FiMoon, FiSearch } from "react-icons/fi";
+import { FiMenu, FiMapPin, FiSun, FiMoon, FiSearch } from "react-icons/fi";
 import logo from "../assets/logo_1.png";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -211,7 +211,7 @@ const Navbar = () => {
               exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              <FiSettings className="text-xl" />
+              <FiMenu className="text-xl" />
             </motion.div>
           </button>
         </div>

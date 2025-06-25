@@ -24,7 +24,7 @@ const HourlyForecast = () => {
         Hourly Forecast
       </h2>
 
-      <div className="flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 min-w-0">
+      <div className="flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 min-w-0 py-5 px-5">
         {hourly.map((hour, index) => {
           const code = iconToCodeMap[hour.icon];
           const isDay = hour.icon?.endsWith("d");
