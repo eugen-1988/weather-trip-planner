@@ -11,7 +11,7 @@ const HourlyForecast = () => {
 
   if (!hourly || hourly.length === 0) {
     return (
-      <p className="text-center text-sm text-white/70">
+      <p className="text-center text-sm text-inherit">
         Loading hourly forecast...
       </p>
     );
@@ -19,8 +19,8 @@ const HourlyForecast = () => {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-white">
-        <HiOutlineClock className="text-2xl text-emerald-300" />
+      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-inherit">
+        <HiOutlineClock className="text-3xl text-emerald-700 dark:text-emerald-300" />
         Hourly Forecast
       </h2>
 
@@ -36,7 +36,7 @@ const HourlyForecast = () => {
               bg-white/10 backdrop-blur-md p-2 rounded-xl
               shadow-[0_8px_20px_rgba(0,0,0,0.25)] border border-white/10"
             >
-              <div className="text-sm text-white/80">
+              <div className="text-sm text-inherit">
                 {dayjs(hour.time).format("HH:mm")}
               </div>
               {code ? (

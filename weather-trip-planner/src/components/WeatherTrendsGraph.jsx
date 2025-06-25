@@ -1,5 +1,4 @@
 // src/components/WeatherTrendsGraph.jsx
-import React from "react";
 import { useSelector } from "react-redux";
 import {
   LineChart,
@@ -32,8 +31,8 @@ const WeatherTrendsGraph = () => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-white">
-        <HiOutlineChartBar className="text-2xl text-amber-300" />
+      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-inherit">
+        <HiOutlineChartBar className="text-3xl text-amber-700 dark:text-amber-300" />
         Temperature Trend (Next Hours)
       </h2>
 
@@ -44,9 +43,9 @@ const WeatherTrendsGraph = () => {
         >
           <LineChart data={graphData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#ffffff22" />
-            <XAxis dataKey="time" stroke="#ccc" />
+            <XAxis dataKey="time" stroke="#fff" />
             <YAxis
-              stroke="#ccc"
+              stroke="#fff"
               domain={["auto", "auto"]}
               tickFormatter={(value) => `${value}°C`}
             />

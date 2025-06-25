@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ✅ Adăugăm tranziție pentru teme */
+body {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
 a.active hr {
   display: block;
 }

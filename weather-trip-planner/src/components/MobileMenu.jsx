@@ -55,7 +55,10 @@ const MobileMenu = ({ isOpen, onClose, onUseLocation, onResetLocation }) => {
       animate={{ x: 0 }}
       exit={{ x: "100%" }}
       transition={{ type: "tween", duration: 0.5 }}
-      className="fixed top-0 right-0 w-64 h-full bg-gradient-to-br from-[#1b2735] via-[#2c3e50] to-[#1b2735] shadow-2xl z-[9999] px-6 py-6 rounded-l-xl border-l border-white/10"
+      className="fixed top-0 right-0 w-64 h-full 
+      bg-white/50 text-blue-900 backdrop-blur-xl 
+      dark:bg-gradient-to-br dark:from-[#0f172a] dark:via-[#1e293b] dark:to-[#0f172a] dark:text-white 
+      shadow-2xl z-[9999] px-6 py-6 rounded-l-xl border-l border-white/20 dark:border-white/10"
     >
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
@@ -83,11 +86,11 @@ const MobileMenu = ({ isOpen, onClose, onUseLocation, onResetLocation }) => {
           <button
             onClick={goToHome}
             className="w-full flex flex-row-reverse items-center justify-center gap-2 px-4 py-2
-      text-sm text-white font-medium rounded-lg
-      bg-gradient-to-r from-indigo-500 to-purple-500
-      shadow hover:from-indigo-600 hover:to-purple-600
-      hover:shadow-lg active:scale-95
-      transition duration-300 ease-in-out"
+             text-sm text-white font-medium rounded-lg
+             bg-gradient-to-r from-indigo-500 to-purple-500
+             shadow hover:from-indigo-600 hover:to-purple-600
+             hover:shadow-lg active:scale-95
+             transition duration-300 ease-in-out"
           >
             <FiHome className="text-lg" />
             Home Page

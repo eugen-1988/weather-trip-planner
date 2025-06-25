@@ -10,7 +10,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../auth/firebase";
 import { useAuth } from "../context/AuthContext";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import useInitLocation from "../hooks/useInitLocation";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -129,8 +128,7 @@ const MyTrips = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#141e30] via-[#243b55] to-[#141e30] text-white">
-      <Navbar />
+    <div className="min-h-screen w-full bg-inherit text-inherit">
       <main className="max-w-7xl mx-auto px-4 py-10 space-y-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.8, y: -40 }}
@@ -143,15 +141,15 @@ const MyTrips = () => {
 
           {/* Main Title Content */}
           <h1 className="text-4xl md:text-5xl font-extrabold text-center text-yellow-300 drop-shadow-xl z-10 flex items-center gap-4">
-            <TbWorldSearch className="text-cyan-300 text-5xl animate-pulse drop-shadow-[0_0_10px_rgba(0,255,255,0.3)]" />
+            <TbWorldSearch className="text-5xl animate-pulse drop-shadow-[0_0_10px_rgba(0,255,255,0.3)] text-cyan-700 dark:text-cyan-300" />
             My Trips
           </h1>
         </motion.div>
 
         {loading ? (
-          <p className="text-center text-white">Loading trips...</p>
+          <p className="text-center text-inherit">Loading trips...</p>
         ) : trips.length === 0 ? (
-          <p className="text-center text-gray-300 italic">
+          <p className="text-center text-inherit italic">
             You have no saved trips at the moment.
           </p>
         ) : (
@@ -174,13 +172,13 @@ const MyTrips = () => {
                           <h2 className="text-2xl font-bold">
                             {trip.city}, {trip.country}
                           </h2>
-                          <div className="flex items-center gap-3 text-sm text-gray-300 mt-2">
-                            <HiOutlineCalendarDays className="text-xl text-yellow-200" />
+                          <div className="flex items-center gap-3 text-sm text-inherit mt-2">
+                            <HiOutlineCalendarDays className="text-xl  dark:text-yellow-300 text-yellow-700" />
                             <span>
-                              <strong className="text-white">
+                              <strong className="text-inherit">
                                 Travel period:
                               </strong>{" "}
-                              <span className="text-yellow-300">
+                              <span className=" dark:text-yellow-300 text-yellow-700">
                                 {formatDate(trip.departureDate)} –{" "}
                                 {formatDate(trip.arrivalDate)}
                               </span>
@@ -250,12 +248,12 @@ const MyTrips = () => {
                               </div>
                             )}
 
-                            <div className="flex w-full justify-between text-sm text-gray-300">
-                              <div className="space-y-3 text-sm text-gray-300">
+                            <div className="flex w-full justify-between text-sm text-inherit">
+                              <div className="space-y-3 text-sm text-inherit">
                                 {/* WIND */}
                                 <div className="flex items-center gap-3">
-                                  <WiStrongWind className="text-2xl text-cyan-400 shrink-0" />
-                                  <span className="whitespace-nowrap text-white">
+                                  <WiStrongWind className="text-2xl text-cyan-700 dark:text-cyan-400 shrink-0" />
+                                  <span className="whitespace-nowrap text-inherit">
                                     <strong>Wind:</strong> {weather.wind.speed}{" "}
                                     m/s
                                   </span>
@@ -263,8 +261,8 @@ const MyTrips = () => {
 
                                 {/* PRESSURE */}
                                 <div className="flex items-center gap-3">
-                                  <WiBarometer className="text-2xl text-blue-300 shrink-0" />
-                                  <span className="whitespace-nowrap text-white">
+                                  <WiBarometer className="text-2xl text-blue-600 dark:text-blue-300 shrink-0" />
+                                  <span className="whitespace-nowrap text-inherit">
                                     <strong>Pressure:</strong>{" "}
                                     {weather.main.pressure} hPa
                                   </span>
@@ -273,7 +271,7 @@ const MyTrips = () => {
                                 {/* HUMIDITY */}
                                 <div className="flex items-center gap-3">
                                   <WiHumidity className="text-2xl text-indigo-400 shrink-0" />
-                                  <span className="whitespace-nowrap text-white">
+                                  <span className="whitespace-nowrap text-inherit">
                                     <strong>Humidity:</strong>{" "}
                                     {weather.main.humidity}%
                                   </span>
@@ -282,13 +280,13 @@ const MyTrips = () => {
 
                               {/* Right - Temp + Description */}
                               <div className="text-right">
-                                <p className="capitalize font-medium text-white text-lg">
+                                <p className="capitalize font-medium text-inherit text-lg">
                                   {weather.weather[0].description}
                                 </p>
                                 <p className="text-3xl font-bold">
                                   {Math.round(weather.main.temp)}°C
                                 </p>
-                                <p className="text-sm text-gray-300">
+                                <p className="text-sm text-inherit">
                                   Feels like:{" "}
                                   {Math.round(weather.main.feels_like)}°C
                                 </p>
@@ -300,13 +298,13 @@ const MyTrips = () => {
                           <div className="hidden sm:flex flex-col flex-1 justify-between space-y-4">
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="capitalize font-medium text-lg text-white">
+                                <p className="capitalize font-medium text-lg text-inherit">
                                   {weather.weather[0].description}
                                 </p>
                                 <p className="text-3xl font-bold">
                                   {Math.round(weather.main.temp)}°C
                                 </p>
-                                <p className="text-sm text-gray-300">
+                                <p className="text-sm text-inherit">
                                   Feels like:{" "}
                                   {Math.round(weather.main.feels_like)}°C
                                 </p>
@@ -320,11 +318,11 @@ const MyTrips = () => {
                               )}
                             </div>
 
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 pt-2 text-xs text-gray-300">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 pt-2 text-xs text-inherit">
                               <div className="flex items-center gap-1 min-w-0">
-                                <WiStrongWind className="text-xl text-cyan-400 shrink-0" />
+                                <WiStrongWind className="text-xl text-cyan-700 dark:text-cyan-400 shrink-0" />
                                 <span className="whitespace-nowrap overflow-hidden text-ellipsis">
-                                  <span className="text-white font-medium">
+                                  <span className="text-inherit font-medium">
                                     Wind:
                                   </span>{" "}
                                   {weather.wind.speed} m/s
@@ -332,9 +330,9 @@ const MyTrips = () => {
                               </div>
 
                               <div className="flex items-center gap-1 min-w-0">
-                                <WiBarometer className="text-xl text-blue-300 shrink-0" />
+                                <WiBarometer className="text-xl text-blue-600 dark:text-blue-300 shrink-0" />
                                 <span className="whitespace-nowrap overflow-hidden text-ellipsis">
-                                  <span className="text-white font-medium">
+                                  <span className="text-inherit font-medium">
                                     Pressure:
                                   </span>{" "}
                                   {weather.main.pressure} hPa
@@ -344,7 +342,7 @@ const MyTrips = () => {
                               <div className="flex items-center gap-1 min-w-0">
                                 <WiHumidity className="text-xl text-indigo-400 shrink-0" />
                                 <span className="whitespace-nowrap overflow-hidden text-ellipsis">
-                                  <span className="text-white font-medium">
+                                  <span className="text-inherit font-medium">
                                     Humidity:
                                   </span>{" "}
                                   {weather.main.humidity}%
@@ -354,7 +352,7 @@ const MyTrips = () => {
                           </div>
                         </div>
                       ) : (
-                        <p className="text-sm text-gray-300">
+                        <p className="text-sm text-inherit">
                           Loading weather...
                         </p>
                       )}

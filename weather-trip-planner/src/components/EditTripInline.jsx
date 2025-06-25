@@ -169,7 +169,7 @@ const EditTripInline = ({ trip, onCancel, onSave }) => {
           type="date"
           value={arrivalDate}
           onChange={(e) => setArrivalDate(e.target.value)}
-          className="bg-white/5 border border-white/20 rounded px-4 py-2 w-full md:w-[280px]"
+          className="bg-white/5 border border-white/20  rounded px-4 py-2 w-full md:w-[280px]"
         />
 
         {/* Butoane */}

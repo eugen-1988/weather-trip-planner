@@ -20,19 +20,16 @@ import { getFiveDayForecast, getHourlyForecast } from "../services/weatherAPI";
 import { useLocationHandler } from "../hooks/useLocationHandler";
 import axios from "axios";
 
-const Navbar = () => {
+const Navbar = ({ onToggleTheme, isDark }) => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { updateToCurrentLocation, resetToInitialLocation } =
     useLocationHandler();
-  const [isDarkMode, setIsDarkMode] = useState(true);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
   const { city, country, loading, error } = useSelector((state) => state.geo);
-
-  const toggleThemeIcon = () => setIsDarkMode((prev) => !prev);
 
   const displayLocation = loading
     ? "Detecting..."
@@ -117,7 +114,7 @@ const Navbar = () => {
             <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-blue-600 to-cyan-400 rounded-full text-white shadow-md z-10">
               <FiMapPin className="text-lg" />
             </div>
-            <span className="text-sm text-white/90 font-medium tracking-wide ml-1">
+            <span className="text-sm text-inherit font-medium tracking-wide ml-1">
               {displayLocation}
             </span>
           </div>
@@ -132,11 +129,14 @@ const Navbar = () => {
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleSearch();
               }}
-              className="pl-4 pr-4 py-2 w-64 rounded-xl bg-white/10 
-                text-gray-200 font-light text-sm placeholder:text-gray-400
-                backdrop-blur-md shadow-inner border border-white/20
-                focus:outline-none focus:ring-1 focus:ring-cyan-400
-                transition-all duration-300 ease-in-out"
+              className="pl-4 pr-4 py-2 w-64 rounded-xl 
+              bg-white/10 dark:bg-white/10
+              text-gray-800 dark:text-gray-200
+              placeholder:text-gray-500 dark:placeholder:text-gray-400
+               font-light text-sm 
+               backdrop-blur-md shadow-inner border border-white/20
+               focus:outline-none focus:ring-1 focus:ring-cyan-400
+               transition-all duration-300 ease-in-out"
             />
             <button
               title="Search"
@@ -162,17 +162,17 @@ const Navbar = () => {
         {/* Dreapta: Temă + Burger */}
         <div className="flex items-center gap-4">
           <button
-            onClick={toggleThemeIcon}
+            onClick={onToggleTheme}
             title="Comută tema"
             className={`p-2 rounded-full shadow-xl border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-white/30
-              ${
-                isDarkMode
-                  ? "bg-gradient-to-tr from-slate-800 to-slate-700 text-sky-300"
-                  : "bg-gradient-to-tr from-yellow-200 to-yellow-300 text-yellow-700"
-              }`}
+            ${
+              isDark
+                ? "bg-gradient-to-tr from-slate-800 to-slate-700 text-sky-300"
+                : "bg-gradient-to-tr from-yellow-200 to-yellow-300 text-yellow-700"
+            }`}
           >
             <AnimatePresence mode="wait">
-              {isDarkMode ? (
+              {isDark ? (
                 <motion.div
                   key="moon"
                   initial={{ opacity: 0, rotate: -90, scale: 0.6 }}

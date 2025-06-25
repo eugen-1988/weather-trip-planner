@@ -11,16 +11,16 @@ const ForecastSlider = () => {
 
   if (!forecast || forecast.length === 0) {
     return (
-      <p className="text-center text-sm text-white/70">Loading forecast...</p>
+      <p className="text-center text-sm text-inherit">Loading forecast...</p>
     );
   }
 
   return (
     <div>
       {/* 🔹 Titlu cu calendar */}
-      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-white">
-        <HiOutlineCalendarDays className="text-2xl text-sky-300" />5 Day
-        Forecast
+      <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-inherit">
+        <HiOutlineCalendarDays className="text-3xl text-sky-700 dark:text-sky-300" />
+        5 Day Forecast
       </h2>
 
       {/* 🔸 Forecast cards scrollable */}
@@ -38,7 +38,7 @@ const ForecastSlider = () => {
                 shadow-[0_8px_20px_rgba(0,0,0,0.25)]              
                 transition-transform duration-300"
               >
-                <div className="text-sm text-white/70 mb-1">
+                <div className="text-sm text-inherit mb-1">
                   {dayjs(day.date).format("ddd, MMM D")}
                 </div>
                 {code ? (
@@ -47,7 +47,7 @@ const ForecastSlider = () => {
                   <span className="text-white text-xl">❓</span>
                 )}
                 <div className="text-2xl font-bold">{day.temp}°C</div>
-                <div className="text-xs text-white/60">{day.description}</div>
+                <div className="text-xs text-inherit">{day.description}</div>
               </div>
             );
           })}

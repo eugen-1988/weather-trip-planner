@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import WeatherMain from "../components/WeatherMain";
 import MapSection from "../components/MapSection";
 import Footer from "../components/Footer";
@@ -95,19 +94,17 @@ const TripPlanner = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#141e30] via-[#243b55] to-[#141e30] text-white">
-      <Navbar />
-
+    <div className="min-h-screen w-full bg-inherit text-inherit">
       <main className="max-w-7xl mx-auto px-4 py-10 space-y-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <WeatherMain />
           <MapSection />
         </div>
 
-        <section className="w-full bg-white/10 border border-white/10 backdrop-blur-md rounded-2xl p-8 shadow-xl text-white">
+        <section className="w-full bg-white/10 border border-white/10 backdrop-blur-md rounded-2xl p-8 shadow-xl text-inherit">
           <div className="flex flex-col md:flex-row gap-8 items-start">
             <div className="w-full md:w-1/2 flex justify-center md:justify-start">
-              <div className="w-full max-w-sm bg-white/10 backdrop-blur-md text-white rounded-xl shadow-lg p-4">
+              <div className="w-full max-w-sm bg-white/10 backdrop-blur-md text-inherit rounded-xl shadow-lg p-4">
                 <DayPicker
                   mode="range"
                   selected={range}
@@ -129,8 +126,8 @@ const TripPlanner = () => {
             <div className="w-full md:w-1/2 flex flex-col gap-6">
               <div className="flex items-center gap-3 text-xl font-medium">
                 <FaRegSmile className="text-2xl text-yellow-300" />
-                <div className="flex items-center gap-2 text-base md:text-lg font-medium text-white">
-                  <span className="text-xl font-semibold text-white">
+                <div className="flex items-center gap-2 text-base md:text-lg font-medium text-inherit">
+                  <span className="text-xl font-semibold text-inherit">
                     Hi{" "}
                     <span className="animate-pulse text-yellow-300">
                       {currentUser?.displayName || "explorer"}
