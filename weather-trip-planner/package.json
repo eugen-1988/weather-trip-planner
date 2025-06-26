@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "vite": "^6.3.5",
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.10.0",
     "classnames": "^2.5.1",
@@ -32,7 +33,6 @@
     "zod": "^3.25.67"
   },
   "devDependencies": {
-    "vite": "^6.3.5",
     "@eslint/js": "^9.25.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
