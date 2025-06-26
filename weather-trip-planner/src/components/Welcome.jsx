@@ -6,16 +6,14 @@ import { motion } from "framer-motion";
 const Welcome = ({ children }) => {
   return (
     <div
-      className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center text-white px-4"
+      className="min-h-screen flex flex-col items-center justify-center px-4 text-white 
+                 bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <motion.div
         initial={{ opacity: 0, y: -50, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{
-          duration: 1.2,
-          ease: [0.22, 1, 0.36, 1], // easeOutBack style for bounce feel
-        }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         className="flex flex-col items-center"
       >
         <img

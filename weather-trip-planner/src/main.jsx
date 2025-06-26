@@ -5,8 +5,6 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import AppWrapper from "./components/AppWrapper";
-
-// 👇 Importă Provider și store
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 

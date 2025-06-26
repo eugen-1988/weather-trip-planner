@@ -1,10 +1,9 @@
-// src/redux/weatherSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   weatherData: null,
-  forecast: [], // 🔹 forecast pe 5 zile (daily)
-  hourlyForecast: [], // 🔹 forecast orar (nou)
+  forecast: [],
+  hourlyForecast: [],
   loading: false,
   error: null,
 };
@@ -39,7 +38,7 @@ export default weatherSlice.reducer;
 export const {
   setWeatherData,
   setForecast,
-  setHourlyForecast, // 🔹 export pentru forecast orar
+  setHourlyForecast,
   setLoading,
   setError,
 } = weatherSlice.actions;

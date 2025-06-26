@@ -1,12 +1,11 @@
 // src/pages/Login.jsx
-import React from "react";
+
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 
-// Icons
 import { MdEmail, MdLockOutline } from "react-icons/md";
 import { BiLogIn, BiUserCircle } from "react-icons/bi";
 
@@ -23,18 +22,15 @@ const Login = ({ noHeader }) => {
   const onSubmit = async ({ email, password }) => {
     try {
       await login(email, password);
-      toast.success(" Logged in successfully!");
+      toast.success("Logged in successfully!");
       navigate("/home");
     } catch (error) {
-      let message = "Login failed. Please try again.";
-      if (error.code === "auth/user-not-found") {
-        message = "This email is not registered.";
-      } else if (error.code === "auth/wrong-password") {
-        message = "Incorrect password. Try again.";
-      } else if (error.code === "auth/invalid-email") {
-        message = "Invalid email address.";
-      }
-      toast.error(message);
+      const messages = {
+        "auth/user-not-found": "This email is not registered.",
+        "auth/wrong-password": "Incorrect password. Try again.",
+        "auth/invalid-email": "Invalid email address.",
+      };
+      toast.error(messages[error.code] || "Login failed. Please try again.");
     }
   };
 
@@ -68,6 +64,7 @@ const Login = ({ noHeader }) => {
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {/* Email */}
         <div>
           <label className="flex items-center gap-2 mb-1 text-sm font-medium text-blue-700">
             <MdEmail className="text-xl text-blue-600" />
@@ -86,6 +83,7 @@ const Login = ({ noHeader }) => {
           )}
         </div>
 
+        {/* Password */}
         <div>
           <label className="flex items-center gap-2 mb-1 text-sm font-medium text-blue-700">
             <MdLockOutline className="text-xl text-blue-600" />
@@ -106,6 +104,7 @@ const Login = ({ noHeader }) => {
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-2/3 mx-auto flex items-center justify-center gap-2 
@@ -118,6 +117,7 @@ const Login = ({ noHeader }) => {
         </button>
       </form>
 
+      {/* Register Link */}
       <p className="text-sm text-center mt-8 text-gray-200 font-medium">
         Don’t have an account?
         <span className="ml-1">

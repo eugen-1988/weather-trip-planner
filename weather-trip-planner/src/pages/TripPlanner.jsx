@@ -21,37 +21,29 @@ const TripPlanner = () => {
   const coords = useSelector((state) => state.geo.coords);
   const city = useSelector((state) => state.geo.city);
   const country = useSelector((state) => state.geo.country);
-
   const [range, setRange] = useState({ from: undefined, to: undefined });
 
   const handleDateSelect = (selectedRange) => {
-    if (!selectedRange) {
-      setRange({ from: undefined, to: undefined });
-      return;
-    }
-    setRange(selectedRange);
+    setRange(selectedRange || { from: undefined, to: undefined });
   };
 
   const handleSaveTrip = async () => {
     if (!range?.from || !range?.to) {
-      toast.error("Please select both departure and arrival dates.", {
+      return toast.error("Please select both departure and arrival dates.", {
         position: "top-center",
       });
-      return;
     }
 
     if (!city || !coords) {
-      toast.error("Location information is missing.", {
+      return toast.error("Location information is missing.", {
         position: "top-center",
       });
-      return;
     }
 
     if (!currentUser) {
-      toast.error("You must be logged in to save a trip.", {
+      return toast.error("You must be logged in to save a trip.", {
         position: "top-center",
       });
-      return;
     }
 
     const tripData = {
@@ -59,10 +51,7 @@ const TripPlanner = () => {
       userName: currentUser.displayName || "Anonymous",
       city,
       country,
-      coords: {
-        lat: coords.lat,
-        lng: coords.lon,
-      },
+      coords: { lat: coords.lat, lng: coords.lon },
       departureDate: range.from,
       arrivalDate: range.to,
       createdAt: serverTimestamp(),
@@ -70,11 +59,7 @@ const TripPlanner = () => {
 
     try {
       await addDoc(collection(db, "trips"), tripData);
-      toast.success("Trip successfully saved!", {
-        position: "top-center",
-      });
-
-      // ✅ Resetare calendar după salvare
+      toast.success("Trip successfully saved!", { position: "top-center" });
       setRange({ from: undefined, to: undefined });
     } catch (error) {
       console.error("Error saving trip:", error);
@@ -85,12 +70,13 @@ const TripPlanner = () => {
   };
 
   const formatDate = (date) => {
-    if (!(date instanceof Date)) return "–";
-    return date.toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
+    return date instanceof Date
+      ? date.toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        })
+      : "–";
   };
 
   return (
@@ -126,8 +112,8 @@ const TripPlanner = () => {
             <div className="w-full md:w-1/2 flex flex-col gap-6">
               <div className="flex items-center gap-3 text-xl font-medium">
                 <FaRegSmile className="text-2xl text-yellow-300" />
-                <div className="flex items-center gap-2 text-base md:text-lg font-medium text-inherit">
-                  <span className="text-xl font-semibold text-inherit">
+                <div className="text-base md:text-lg font-medium text-inherit">
+                  <span className="text-xl font-semibold">
                     Hi{" "}
                     <span className="animate-pulse text-yellow-300">
                       {currentUser?.displayName || "explorer"}
@@ -162,11 +148,7 @@ const TripPlanner = () => {
 
               <button
                 onClick={handleSaveTrip}
-                className="w-full md:w-[200px] flex items-center justify-center gap-2 px-5 py-2.5
-                 text-sm font-semibold text-white rounded-xl
-                 bg-gradient-to-r from-green-400 via-green-500 to-green-600
-                 shadow-lg hover:from-green-500 hover:to-green-700
-                 transition-all duration-300 ease-in-out transform hover:scale-[1.03] active:scale-95"
+                className="w-full md:w-[200px] flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white rounded-xl bg-gradient-to-r from-green-400 via-green-500 to-green-600 shadow-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 ease-in-out transform hover:scale-[1.03] active:scale-95"
               >
                 <FaSave className="text-base" />
                 Save trip
@@ -175,7 +157,6 @@ const TripPlanner = () => {
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );

@@ -1,5 +1,4 @@
-// src/components/MapSection.jsx
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import { motion } from "framer-motion";
@@ -19,7 +18,7 @@ const RecenterMap = ({ coords }) => {
 
 const MapSection = () => {
   const coords = useSelector((state) => state.geo.coords);
-  const defaultCenter = [51.5074, -0.1278]; // fallback: Londra
+  const defaultCenter = [51.5074, -0.1278];
   const initialCenter = coords ? [coords.lat, coords.lon] : defaultCenter;
 
   const openWeatherLayer = `https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${
@@ -39,19 +38,19 @@ const MapSection = () => {
       <MapContainer
         center={initialCenter}
         zoom={11}
-        scrollWheelZoom={true}
+        scrollWheelZoom
         className="w-full h-full z-[5] relative rounded-3xl"
       >
-        {/* Strat principal: OpenStreetMap */}
+        {/*  OpenStreetMap Layer */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* Strat OpenWeather: Temperatură globală */}
+        {/*  OpenWeather Temperature Overlay */}
         <TileLayer url={openWeatherLayer} opacity={0.5} />
 
-        {/* 🔥 Marker pentru locația utilizatorului */}
+        {/*  User Location Marker */}
         {coords && (
           <Marker position={[coords.lat, coords.lon]}>
             <Popup>

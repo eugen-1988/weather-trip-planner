@@ -1,5 +1,3 @@
-// src/utils/iconToCodeMap.js
-
 const iconToCodeMap = {
   "01d": 800, // clear day
   "01n": 800, // clear night

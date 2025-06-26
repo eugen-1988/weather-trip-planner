@@ -1,15 +1,13 @@
-// src/components/ForecastSlider.jsx
-import React from "react";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
 import WeatherIcon from "./WeatherIcon";
 import iconToCodeMap from "../utils/iconToCodeMap";
-import { HiOutlineCalendarDays } from "react-icons/hi2"; // 📅
+import { HiOutlineCalendarDays } from "react-icons/hi2";
 
 const ForecastSlider = () => {
   const forecast = useSelector((state) => state.weather.forecast);
 
-  if (!forecast || forecast.length === 0) {
+  if (!forecast?.length) {
     return (
       <p className="text-center text-sm text-inherit">Loading forecast...</p>
     );
@@ -17,13 +15,13 @@ const ForecastSlider = () => {
 
   return (
     <div>
-      {/* 🔹 Titlu cu calendar */}
+      {/* Titlu Forecast */}
       <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-inherit">
         <HiOutlineCalendarDays className="text-3xl text-sky-700 dark:text-sky-300" />
         5 Day Forecast
       </h2>
 
-      {/* 🔸 Forecast cards scrollable */}
+      {/*  Scroll orizontal */}
       <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 py-6 px-6">
         <div className="flex gap-4 min-w-max">
           {forecast.map((day, index) => {
@@ -34,18 +32,19 @@ const ForecastSlider = () => {
               <div
                 key={index}
                 className="min-w-[120px] flex-shrink-0 flex flex-col items-center text-center 
-                bg-white/10 backdrop-blur-md p-2 rounded-xl border border-white/10 
-                shadow-[0_8px_20px_rgba(0,0,0,0.25)]              
-                transition-transform duration-300"
+                  bg-white/10 backdrop-blur-md p-2 rounded-xl border border-white/10 
+                  shadow-[0_8px_20px_rgba(0,0,0,0.25)] transition-transform duration-300"
               >
                 <div className="text-sm text-inherit mb-1">
                   {dayjs(day.date).format("ddd, MMM D")}
                 </div>
+
                 {code ? (
                   <WeatherIcon code={code} isDay={isDay} size={66} />
                 ) : (
                   <span className="text-white text-xl">❓</span>
                 )}
+
                 <div className="text-2xl font-bold">{day.temp}°C</div>
                 <div className="text-xs text-inherit">{day.description}</div>
               </div>

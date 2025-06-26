@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       setLoading(false);
     });
+
     return () => unsubscribe();
   }, []);
 
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => signOut(auth);
 
-  const value = {
+  const authContextValue = {
     currentUser,
     register,
     login,
@@ -48,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={authContextValue}>
       {!loading && children}
     </AuthContext.Provider>
   );

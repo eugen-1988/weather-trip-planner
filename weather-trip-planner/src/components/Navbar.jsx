@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { FiMenu, FiMapPin, FiSun, FiMoon, FiSearch } from "react-icons/fi";
 import logo from "../assets/logo_1.png";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import MobileMenu from "./MobileMenu";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+
+import MobileMenu from "./MobileMenu";
+import { useLocationHandler } from "../hooks/useLocationHandler";
 import {
   setLocationStart,
   setLocationSuccess,
@@ -17,18 +18,15 @@ import {
   setHourlyForecast,
 } from "../redux/weatherSlice";
 import { getFiveDayForecast, getHourlyForecast } from "../services/weatherAPI";
-import { useLocationHandler } from "../hooks/useLocationHandler";
-import axios from "axios";
 
 const Navbar = ({ onToggleTheme, isDark }) => {
-  const { currentUser } = useAuth();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { updateToCurrentLocation, resetToInitialLocation } =
     useLocationHandler();
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
   const { city, country, loading, error } = useSelector((state) => state.geo);
 
   const displayLocation = loading
@@ -58,12 +56,10 @@ const Navbar = ({ onToggleTheme, isDark }) => {
       if (!geo) throw new Error("Location not found");
 
       const coords = { lat: geo.lat, lon: geo.lon };
-      const city = geo.name;
-      const country = geo.country;
+      dispatch(
+        setLocationSuccess({ coords, city: geo.name, country: geo.country })
+      );
 
-      dispatch(setLocationSuccess({ coords, city, country }));
-
-      // Actualizare meteo
       const weatherRes = await axios.get(
         "https://api.openweathermap.org/data/2.5/weather",
         {
@@ -77,7 +73,6 @@ const Navbar = ({ onToggleTheme, isDark }) => {
       );
       dispatch(setWeatherData(weatherRes.data));
 
-      // Forecast 5 zile + orar
       const forecast = await getFiveDayForecast(geo.lat, geo.lon);
       dispatch(setForecast(forecast));
 
@@ -93,7 +88,7 @@ const Navbar = ({ onToggleTheme, isDark }) => {
   return (
     <header className="w-full px-4 py-4 bg-black/30 shadow-md z-50 relative">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Stânga: Logo + Text */}
+        {/* Logo + Brand */}
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 p-[2px] rounded-full bg-gradient-to-br from-orange-400 to-yellow-500 shadow-[0_4px_10px_rgba(255,140,0,0.4)]">
             <img
@@ -107,7 +102,7 @@ const Navbar = ({ onToggleTheme, isDark }) => {
           </span>
         </div>
 
-        {/* Mijloc: DOAR PE DESKTOP */}
+        {/* Desktop Middle Section */}
         <div className="hidden md:flex items-center gap-4">
           <div className="relative flex items-center gap-2">
             <span className="absolute w-8 h-8 rounded-full bg-cyan-500 opacity-30 animate-ping" />
@@ -119,32 +114,19 @@ const Navbar = ({ onToggleTheme, isDark }) => {
             </span>
           </div>
 
-          {/* Search Input + Button */}
           <div className="flex items-center gap-2">
             <input
               type="text"
               placeholder="Search location..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSearch();
-              }}
-              className="pl-4 pr-4 py-2 w-64 rounded-xl 
-              bg-white/10 dark:bg-white/10
-              text-gray-800 dark:text-gray-200
-              placeholder:text-gray-500 dark:placeholder:text-gray-400
-               font-light text-sm 
-               backdrop-blur-md shadow-inner border border-white/20
-               focus:outline-none focus:ring-1 focus:ring-cyan-400
-               transition-all duration-300 ease-in-out"
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              className="pl-4 pr-4 py-2 w-64 rounded-xl bg-white/10 dark:bg-white/10 text-gray-800 dark:text-gray-200 placeholder:text-gray-500 dark:placeholder:text-gray-400 font-light text-sm backdrop-blur-md shadow-inner border border-white/20 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all duration-300 ease-in-out"
             />
             <button
               title="Search"
               onClick={handleSearch}
-              className="p-2 rounded-full shadow-xl border border-white/20
-                bg-gradient-to-tr from-cyan-500 to-blue-500
-                text-white hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-cyan-300
-                transition-all duration-300"
+              className="p-2 rounded-full shadow-xl border border-white/20 bg-gradient-to-tr from-cyan-500 to-blue-500 text-white hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-cyan-300 transition-all duration-300"
             >
               <motion.div
                 key="search"
@@ -159,13 +141,12 @@ const Navbar = ({ onToggleTheme, isDark }) => {
           </div>
         </div>
 
-        {/* Dreapta: Temă + Burger */}
+        {/* Right Section: Theme + Menu */}
         <div className="flex items-center gap-4">
           <button
             onClick={onToggleTheme}
             title="Comută tema"
-            className={`p-2 rounded-full shadow-xl border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-white/30
-            ${
+            className={`p-2 rounded-full shadow-xl border border-white/20 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-white/30 ${
               isDark
                 ? "bg-gradient-to-tr from-slate-800 to-slate-700 text-sky-300"
                 : "bg-gradient-to-tr from-yellow-200 to-yellow-300 text-yellow-700"
@@ -199,10 +180,7 @@ const Navbar = ({ onToggleTheme, isDark }) => {
           <button
             onClick={() => setMenuOpen(true)}
             title="Meniu"
-            className="p-2 rounded-full shadow-xl border border-white/20
-              bg-gradient-to-tr from-orange-400 to-yellow-400
-              text-white hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-yellow-400
-              transition-all duration-300"
+            className="p-2 rounded-full shadow-xl border border-white/20 bg-gradient-to-tr from-orange-400 to-yellow-400 text-white hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-yellow-400 transition-all duration-300"
           >
             <motion.div
               key="burger"
@@ -217,7 +195,7 @@ const Navbar = ({ onToggleTheme, isDark }) => {
         </div>
       </div>
 
-      {/* DOAR PE MOBILE */}
+      {/* Mobile Search + Location */}
       <div className="mt-4 md:hidden flex flex-col items-center gap-3">
         <div className="relative flex items-center gap-2">
           <span className="absolute w-8 h-8 rounded-full bg-cyan-500 opacity-30 animate-ping" />
@@ -235,22 +213,13 @@ const Navbar = ({ onToggleTheme, isDark }) => {
             placeholder="Search location..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") handleSearch();
-            }}
-            className="pl-4 pr-4 py-2 w-full rounded-xl bg-white/10 
-              text-gray-200 font-light text-sm placeholder:text-gray-400
-              backdrop-blur-md shadow-inner border border-white/20
-              focus:outline-none focus:ring-1 focus:ring-cyan-400
-              transition-all duration-300 ease-in-out"
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            className="pl-4 pr-4 py-2 w-full rounded-xl bg-white/10 text-gray-200 font-light text-sm placeholder:text-gray-400 backdrop-blur-md shadow-inner border border-white/20 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all duration-300 ease-in-out"
           />
           <button
             title="Search"
             onClick={handleSearch}
-            className="p-2 rounded-full shadow-xl border border-white/20
-              bg-gradient-to-tr from-cyan-500 to-blue-500
-              text-white hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-cyan-300
-              transition-all duration-300"
+            className="p-2 rounded-full shadow-xl border border-white/20 bg-gradient-to-tr from-cyan-500 to-blue-500 text-white hover:scale-110 hover:ring-2 hover:ring-offset-2 hover:ring-cyan-300 transition-all duration-300"
           >
             <motion.div
               key="search-mobile"
@@ -265,7 +234,7 @@ const Navbar = ({ onToggleTheme, isDark }) => {
         </div>
       </div>
 
-      {/* Overlay + MobileMenu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <>
