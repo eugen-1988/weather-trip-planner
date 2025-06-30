@@ -3,4 +3,4 @@ Allow: /
 Disallow: /login
 Disallow: /register
 
-Sitemap: https://www.exemplu-tau.com/sitemap.xml
+Sitemap: https://weather-trip-planner-xi.vercel.app/sitemap.xml
