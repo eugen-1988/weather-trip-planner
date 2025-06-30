@@ -7,6 +7,7 @@ import { AuthProvider } from "./context/AuthContext";
 import AppWrapper from "./components/AppWrapper";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import "./utils/fixLeafletIcons";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
