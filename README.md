@@ -28,6 +28,8 @@ Weather Trip Planner is a modern and intuitive web app that lets you plan your t
 **Maps:** Leaflet + React-Leaflet  
 **Other:** Axios, UUID, Recharts, dotenv
 
+[Live Demo](https://weather-trip-planner-xi.vercel.app/)
+
  🔧 Local Setup
 ```bash
 git clone https://github.com/eugen-1988/weather-trip-planner.git
@@ -35,7 +37,7 @@ cd weather-trip-planner
 npm install
 npm run dev
 
-[Live Demo](https://weather-trip-planner-xi.vercel.app/)
+
 
 
 📁 Project Structure Highlights
