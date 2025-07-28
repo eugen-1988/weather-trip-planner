@@ -35,8 +35,7 @@ cd weather-trip-planner
 npm install
 npm run dev
 
-🌐 Live Demo
-🔗 [Live Demo](https://weather-trip-planner-xi.vercel.app/)
+[Live Demo](https://weather-trip-planner-xi.vercel.app/)
 
 
 📁 Project Structure Highlights
@@ -100,8 +99,7 @@ cd weather-trip-planner
 npm install
 npm run dev
 
-🌐 Live Demo
-🔗 [Live Demo](https://weather-trip-planner-xi.vercel.app/)
+[Live Demo](https://weather-trip-planner-xi.vercel.app/)
 
 
 📁 Projektstruktur
