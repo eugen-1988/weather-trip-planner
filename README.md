@@ -36,7 +36,8 @@ npm install
 npm run dev
 
 🌐 Live Demo
-🔗 [https://weather-trip-planner-xi.vercel.app/](https://weather-trip-planner-xi.vercel.app/login)
+🔗 [Live Demo](https://weather-trip-planner-xi.vercel.app/)
+
 
 📁 Project Structure Highlights
 /components – Reusable UI elements (WeatherDisplay, Map, Calendar)
@@ -100,7 +101,8 @@ npm install
 npm run dev
 
 🌐 Live Demo
-🔗 https://weather-trip-planner-xi.vercel.app/
+🔗 [Live Demo](https://weather-trip-planner-xi.vercel.app/)
+
 
 📁 Projektstruktur
 /components – Wiederverwendbare UI-Komponenten (Weather, Map, Calendar)
